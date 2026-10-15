@@ -37,16 +37,19 @@ public class PlayerController : MonoBehaviour
     {
         // Reads movement values from the Input Actions
         moveInput = controls.Player.Move.ReadValue<Vector2>();
-        Debug.Log(moveInput);
 
+        // Creating a new vector movement that will get values on the x and z axis
         movement = new Vector3(moveInput.x, 0f, moveInput.y);
         movement = Vector3.ClampMagnitude(movement, 1f);
 
+        // Defines player's velocity
         Vector3 velocity = playerRb.linearVelocity;
 
+        // Multiply player's velocity by the input given by user (current velocity = 1 -moveInput- * 15 -moveSpeed-)
         velocity.x = movement.x * moveSpeed;
         velocity.z = movement.z * moveSpeed;
 
+        // Apply the a new calculated velocity to the player's rigidbody
         playerRb.linearVelocity = velocity;
     }
 }
